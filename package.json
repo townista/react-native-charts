@@ -1,0 +1,15 @@
+{
+  "name": "chartlib",
+  "version": "1.0.0",
+  "description": "react native module for native chart https://github.com/PhilJay/MPAndroidChart",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rahul Ravindran <rahul.r945@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "react": "^15.1.0",
+    "react-native": "^0.28.0"
+  }
+}

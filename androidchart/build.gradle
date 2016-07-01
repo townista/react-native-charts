@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.example.androidchart"
+        minSdkVersion 19
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+
+}
+
+dependencies {
+    compile 'com.github.PhilJay:MPAndroidChart:v2.2.5'
+    compile 'com.facebook.react:react-native:+'
+}
