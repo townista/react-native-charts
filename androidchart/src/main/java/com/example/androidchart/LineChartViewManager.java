@@ -63,25 +63,29 @@ public class LineChartViewManager extends SimpleViewManager<com.github.mikephil.
     }
 
     @ReactProp(name = "data")
-    public void setLineData(LineChart root, Object[] dataArray){
-        ArrayList<String> xlabels = new ArrayList<>();
-        ArrayList<Entry> xvalues = new ArrayList<>();
+    public void setLineData(LineChart root, @Nullable String data) {
+        try {
+            ArrayList<String> xlabels = new ArrayList<>();
+            ArrayList<Entry> xvalues = new ArrayList<>();
+            JSONArray dataArray = new JSONArray(data);
+            for (int i = 0; i < dataArray.length() ; i++) {
+                try {
+                    JSONObject dataArrayElem = (JSONObject) dataArray.get(i);
+                    xlabels.add(dataArrayElem.getString("date"));
+                    xvalues.add(new Entry(dataArrayElem.getInt("value"), i));
+                } catch (JSONException e) {
 
-        for (int i=0 ; i < dataArray.length ; i ++){
-            try {
-                JSONObject dataArrayElem = (JSONObject) dataArray[i];
-                xlabels.add(dataArrayElem.getString("date"));
-                xvalues.add(new Entry(dataArrayElem.getInt("value"),i));
+                }
+
             }
-            catch(JSONException e){
-
-            }
-
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(new LineDataSet(xvalues, "values"));
+            LineData ldata = new LineData(xlabels, dataSets);
+            root.setData(ldata);
+            root.invalidate();
         }
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(new LineDataSet(xvalues,"values"));
-        LineData ldata = new LineData(xlabels,dataSets);
-        root.setData(ldata);
-        root.invalidate();
+        catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 }
