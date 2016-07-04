@@ -8,6 +8,7 @@
 'use-strict';
 
 import React, {requireNativeComponent , PropTypes } from 'react';
+import requireNativeComponent from 'react-native';
 
 var iface={
   name: 'LineChart',
