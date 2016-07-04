@@ -7,12 +7,12 @@
 */
 'use-strict';
 
-var { requireNativeComponent , React } = require('react-native');
+import React, {requireNativeComponent , PropTypes } from 'react';
 
 var iface={
   name: 'LineChart',
   propTypes:{
-    data : React.PropTypes.string,
+    data: PropTypes.string,
   }
 
 };
