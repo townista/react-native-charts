@@ -3,7 +3,7 @@
 * @Date:   2016-07-04T16:06:42+05:30
 * @Email:  rahul.r945@gmail.com
 * @Last modified by:   root
-* @Last modified time: 2016-07-04T16:25:39+05:30
+* @Last modified time: 2016-07-04T16:48:32+05:30
 */
 
 
@@ -29,8 +29,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.lang.Object;
 
 
@@ -65,7 +63,7 @@ public class LineChartViewManager extends SimpleViewManager<com.github.mikephil.
     }
 
     @ReactProp(name = "data")
-    public void setLineData(LineChart root, @Nullable Object[] dataArray){
+    public void setLineData(LineChart root, Object[] dataArray){
         ArrayList<String> xlabels = new ArrayList<>();
         ArrayList<Entry> xvalues = new ArrayList<>();
 
