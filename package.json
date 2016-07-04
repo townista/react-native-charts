@@ -6,10 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords" :[
+    "react",
+    "react-native",
+    "charts",
+    "linechart"
+  ],
   "author": "Rahul Ravindran <rahul.r945@gmail.com>",
   "license": "MIT",
+  "repository": "https://github.com/townista/react-native-charts.git",
   "devDependencies": {
-    "react": "^15.1.0",
+    "react": "^15.2.0",
     "react-native": "^0.28.0"
   }
 }
