@@ -12,7 +12,7 @@ var { requireNativeComponent , React } = require('react-native');
 var iface={
   name: 'LineChart',
   propTypes:{
-    data : React.PropTypes.arrayOf(React.PropTypes.object)
+    data : React.PropTypes.string,
   }
 
 };
