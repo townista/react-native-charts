@@ -53,13 +53,13 @@ public class LineChartViewManager extends SimpleViewManager<com.github.mikephil.
     }
 
     @ReactProp(name = "data")
-    public void setLineData(LineChart root, @Nullable JSONArray dataArray){
+    public void setLineData(LineChart root, @Nullable Object[] dataArray){
         ArrayList<String> xlabels = new ArrayList<>();
         ArrayList<Entry> xvalues = new ArrayList<>();
 
-        for (int i=0 ; i < dataArray.length() ; i ++){
+        for (int i=0 ; i < dataArray.length ; i ++){
             try {
-                JSONObject dataArrayElem = (JSONObject) dataArray.get(i);
+                JSONObject dataArrayElem = (JSONObject) dataArray[i];
                 xlabels.add(dataArrayElem.getString("date"));
                 xvalues.add(new Entry(dataArrayElem.getInt("value"),i));
             }
