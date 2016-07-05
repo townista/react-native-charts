@@ -37,8 +37,6 @@ public class LineChartViewManager extends SimpleViewManager<com.example.androidc
 
     public static final String REACT_CLASS="RCTLineChart";
 
-
-
     @Override
     public LayoutShadowNode createShadowNodeInstance() {
         return super.createShadowNodeInstance();
@@ -65,7 +63,7 @@ public class LineChartViewManager extends SimpleViewManager<com.example.androidc
     }
 
     @ReactProp(name = "data")
-    public void setLineData(LineChart root, @Nullable String data) {
+    public void setLineData(com.example.androidchart.LineChart root, @Nullable String data) {
         try {
             ArrayList<String> xlabels = new ArrayList<>();
             ArrayList<Entry> xvalues = new ArrayList<>();
