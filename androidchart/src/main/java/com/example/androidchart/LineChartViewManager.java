@@ -7,7 +7,7 @@
 */
 
 
-
+    
 package com.example.androidchart;
 
 import android.support.annotation.Nullable;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.lang.Object;
 
 
-public class LineChartViewManager extends SimpleViewManager<com.github.mikephil.charting.charts.LineChart> {
+public class LineChartViewManager extends SimpleViewManager<com.example.androidchart.LineChart> {
     public static final String REACT_CLASS="RCTLineChart";
 
 
@@ -48,7 +48,7 @@ public class LineChartViewManager extends SimpleViewManager<com.github.mikephil.
     }
 
     @Override
-    public void updateExtraData(LineChart root, Object extraData) {
+    public void updateExtraData(com.example.androidchart.LineChart root, Object extraData) {
         super.updateExtraData(root, extraData);
     }
 
@@ -58,7 +58,7 @@ public class LineChartViewManager extends SimpleViewManager<com.github.mikephil.
     }
 
     @Override
-    protected LineChart createViewInstance(ThemedReactContext reactContext) {
+    protected com.example.androidchart.LineChart createViewInstance(ThemedReactContext reactContext) {
         return new com.example.androidchart.LineChart(reactContext);
     }
 
