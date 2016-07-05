@@ -3,18 +3,32 @@
 * @Date:   2016-07-01T14:54:20+05:30
 * @Email:  rahul.r945@gmail.com
 * @Last modified by:   root
-* @Last modified time: 2016-07-05T12:37:40+05:30
+* @Last modified time: 2016-07-05T14:20:37+05:30
 */
 'use-strict';
 
-import React  from 'react';
+import React,{Component} from 'react';
 import {PropTypes, requireNativeComponent }from 'react-native';
 
-var iface={
-  name: 'LineChart',
-  propTypes:{
-    data: PropTypes.string
+class LineChartView extends Component{
+  constructor(props){
+    super(props);
+    this.props =props;
   }
-};
 
-module.exports = requireNativeComponent('RCTLineChart',iface);
+  setLineData(data){
+    this.state.data = data;
+  }
+
+  render(){
+    return <CustomLineChartView data = this.props.data  />
+  }
+
+}
+LineChartView.propTypes ={
+    ...View.propTypes,
+    data: PropTypes.string,
+};
+var CustomLineChartView = requireNativeComponent('RCTLineChart',LineChartView);
+
+module.exports = LineChartView;

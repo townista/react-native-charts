@@ -7,7 +7,7 @@
 */
 
 
-    
+
 package com.example.androidchart;
 
 import android.support.annotation.Nullable;
@@ -15,6 +15,7 @@ import android.support.annotation.Nullable;
 import com.facebook.react.uimanager.LayoutShadowNode;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.UIProp;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.github.mikephil.charting.charts.*;
 import com.github.mikephil.charting.charts.LineChart;
@@ -33,6 +34,7 @@ import java.lang.Object;
 
 
 public class LineChartViewManager extends SimpleViewManager<com.example.androidchart.LineChart> {
+
     public static final String REACT_CLASS="RCTLineChart";
 
 
