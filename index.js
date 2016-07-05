@@ -3,12 +3,12 @@
 * @Date:   2016-07-01T14:54:20+05:30
 * @Email:  rahul.r945@gmail.com
 * @Last modified by:   root
-* @Last modified time: 2016-07-05T14:29:44+05:30
+* @Last modified time: 2016-07-05T14:36:17+05:30
 */
 'use-strict';
 
 import React,{Component} from 'react';
-import {PropTypes, requireNativeComponent }from 'react-native';
+import {PropTypes, requireNativeComponent, View }from 'react-native';
 
 class LineChartView extends Component{
   constructor(props){
