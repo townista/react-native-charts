@@ -16,7 +16,6 @@
   "license": "MIT",
   "repository": "https://github.com/townista/react-native-charts.git",
   "devDependencies": {
-    "react": "^15.2.0",
     "react-native": "^0.28.0"
   }
 }
