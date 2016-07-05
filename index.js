@@ -3,7 +3,7 @@
 * @Date:   2016-07-01T14:54:20+05:30
 * @Email:  rahul.r945@gmail.com
 * @Last modified by:   root
-* @Last modified time: 2016-07-05T14:38:46+05:30
+* @Last modified time: 2016-07-05T14:50:16+05:30
 */
 'use-strict';
 
@@ -13,15 +13,10 @@ import {requireNativeComponent, View }from 'react-native';
 class LineChartView extends Component{
   constructor(props){
     super(props);
-    this.props =props;
-  }
-
-  setLineData(data){
-    this.state.data = data;
   }
 
   render(){
-    return (<CustomLineChartView data= {this.props.data} />);
+    return (<CustomLineChartView {...this.props} />);
   }
 
 }
