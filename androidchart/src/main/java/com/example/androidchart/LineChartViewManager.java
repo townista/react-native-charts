@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.lang.Object;
 
 
-public class LineChartViewManager extends SimpleViewManager<com.example.androidchart.LineChart> {
+public class LineChartViewManager extends SimpleViewManager<LineChart> {
 
     public static final String REACT_CLASS="RCTLineChart";
 
@@ -48,7 +48,7 @@ public class LineChartViewManager extends SimpleViewManager<com.example.androidc
     }
 
     @Override
-    public void updateExtraData(com.example.androidchart.LineChart root, Object extraData) {
+    public void updateExtraData(LineChart root, Object extraData) {
         super.updateExtraData(root, extraData);
     }
 
@@ -63,7 +63,7 @@ public class LineChartViewManager extends SimpleViewManager<com.example.androidc
     }
 
     @ReactProp(name = "data")
-    public void setLineData(com.example.androidchart.LineChart root, @Nullable String data) {
+    public void setLineData(LineChart root, @Nullable String data) {
             ArrayList<String> xlabels = new ArrayList<>();
             ArrayList<Entry> xvalues = new ArrayList<>();
             if (data != null) {

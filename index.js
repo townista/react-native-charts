@@ -3,7 +3,7 @@
 * @Date:   2016-07-01T14:54:20+05:30
 * @Email:  rahul.r945@gmail.com
 * @Last modified by:   root
-* @Last modified time: 2016-07-05T16:28:36+05:30
+* @Last modified time: 2016-07-06T13:33:17+05:30
 */
 'use-strict';
 
@@ -16,14 +16,17 @@ class LineChartView extends Component{
   }
 
   render(){
-    return (<CustomLineChartView data={this.props.data}  />);
+    return (<CustomLineChartView data={this.props.data} />);
   }
 
 }
+
 LineChartView.propTypes ={
     ...View.propTypes,
     data: PropTypes.string,
 };
+
+
 var CustomLineChartView = requireNativeComponent('RCTLineChart',LineChartView);
 
 module.exports = LineChartView;
