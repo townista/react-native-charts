@@ -11,6 +11,7 @@
 package com.example.androidchart;
 
 import android.support.annotation.Nullable;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 import com.facebook.react.uimanager.LayoutShadowNode;
@@ -26,17 +27,21 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.XAxisValueFormatter;
 import com.github.mikephil.charting.formatter.YAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.lang.Object;
+import java.util.Date;
 
 
 public class LineChartViewManager extends SimpleViewManager<LineChart> {
@@ -94,13 +99,14 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
                     }
                     ArrayList<ILineDataSet> dataSets = new ArrayList<>();
                     LineDataSet set = new LineDataSet(xvalues, "values");
-                    set.setColors(ColorTemplate.MATERIAL_COLORS);
                     dataSets.add(set);
                     LineData ldata = new LineData(xlabels, dataSets);
                     root.setData(ldata);
                     root.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
                     YAxis yaxis = root.getAxisLeft();
                     yaxis.setValueFormatter(new YAxisFormatter());
+                    XAxis xAxis = root.getXAxis();
+                    xAxis.setValueFormatter(new XAxisFromatter());
                     root.invalidate();
                 }
                 catch ( JSONException e){
@@ -108,6 +114,18 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
                 }
             }
 
+    }
+    class XAxisFromatter implements XAxisValueFormatter{
+        SimpleDateFormat format;
+
+        @Override
+        public String getXValue(String original, int index, ViewPortHandler viewPortHandler) {
+            return format.format(Date.parse(original));
+        }
+
+        public XAxisFromatter() {
+            format = new SimpleDateFormat("EEE, d MMM");
+        }
     }
     class YAxisFormatter implements YAxisValueFormatter{
         private DecimalFormat mformat;
