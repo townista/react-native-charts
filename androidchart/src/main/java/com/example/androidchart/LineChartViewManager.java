@@ -64,7 +64,7 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
     }
 
     @ReactProp(name = "data")
-    public void setLineData(LineChart root, @Nullable String data) {
+    public void setLineData(LineChart root, String data) {
             ArrayList<String> xlabels = new ArrayList<>();
             ArrayList<Entry> xvalues = new ArrayList<>();
 
@@ -73,7 +73,7 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
             if (data != null) {
                 try {
                     JSONArray dataArray = new JSONArray(data);
-                    
+
                     Log.d("linechart",dataArray.toString());
 
                     for (int i = 0 ; i < dataArray.length() ; i++) {
