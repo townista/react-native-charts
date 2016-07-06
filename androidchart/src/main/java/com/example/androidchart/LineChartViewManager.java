@@ -118,12 +118,13 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
     }
     class XAxisFromatter implements XAxisValueFormatter{
         SimpleDateFormat format;
+        SimpleDateFormat parseformat;
 
         @Override
         public String getXValue(String original, int index, ViewPortHandler viewPortHandler) {
             String date = "";
             try {
-                Date temp = format.parse(original);
+                Date temp = parseformat.parse(original);
                 date = format.format(temp);
             }
             catch (ParseException  e){
@@ -134,6 +135,7 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
 
         public XAxisFromatter() {
             format = new SimpleDateFormat("EEE, d MMM");
+            parseformat = new SimpleDateFormat("yyyy-MM-dd");
         }
     }
     class YAxisFormatter implements YAxisValueFormatter{
