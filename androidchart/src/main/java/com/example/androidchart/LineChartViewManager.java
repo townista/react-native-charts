@@ -105,8 +105,6 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
                     root.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
                     YAxis yaxis = root.getAxisLeft();
                     yaxis.setValueFormatter(new YAxisFormatter());
-                    XAxis xAxis = root.getXAxis();
-                    xAxis.setValueFormatter(new XAxisFromatter());
                     root.invalidate();
                 }
                 catch ( JSONException e){
@@ -129,6 +127,7 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
     }
     class YAxisFormatter implements YAxisValueFormatter{
         private DecimalFormat mformat;
+
         public YAxisFormatter() {
             mformat = new DecimalFormat("##0.#");
 
