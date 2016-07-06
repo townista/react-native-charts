@@ -38,6 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.lang.Object;
@@ -105,6 +106,8 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
                     root.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
                     YAxis yaxis = root.getAxisLeft();
                     yaxis.setValueFormatter(new YAxisFormatter());
+                    XAxis xaxis = root.getXAxis();
+                    xaxis.setValueFormatter(new XAxisFromatter());
                     root.invalidate();
                 }
                 catch ( JSONException e){
@@ -118,7 +121,15 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
 
         @Override
         public String getXValue(String original, int index, ViewPortHandler viewPortHandler) {
-            return format.format(Date.parse(original));
+            String date = "";
+            try {
+                Date temp = format.parse(original);
+                date = format.format(temp);
+            }
+            catch (ParseException  e){
+
+            }
+            return date;
         }
 
         public XAxisFromatter() {
