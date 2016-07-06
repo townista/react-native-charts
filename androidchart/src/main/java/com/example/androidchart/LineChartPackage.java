@@ -14,7 +14,7 @@ public class LineChartPackage implements ReactPackage{
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
