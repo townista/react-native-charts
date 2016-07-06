@@ -11,6 +11,7 @@
 package com.example.androidchart;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.facebook.react.uimanager.LayoutShadowNode;
 import com.facebook.react.uimanager.SimpleViewManager;
@@ -66,16 +67,23 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
     public void setLineData(LineChart root, @Nullable String data) {
             ArrayList<String> xlabels = new ArrayList<>();
             ArrayList<Entry> xvalues = new ArrayList<>();
+
+            Log.d("linechart",data);
+
             if (data != null) {
                 try {
                     JSONArray dataArray = new JSONArray(data);
-                    for (int i = 0; i < dataArray.length(); i++) {
+                    
+                    Log.d("linechart",dataArray.toString());
+
+                    for (int i = 0 ; i < dataArray.length() ; i++) {
                         try {
                             JSONObject dataArrayElem = (JSONObject) dataArray.get(i);
                             xlabels.add(dataArrayElem.getString("date"));
                             xvalues.add(new Entry(dataArrayElem.getInt("value"), i));
-                        } catch (JSONException e) {
-
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
                         }
 
                     }
