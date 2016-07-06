@@ -27,6 +27,7 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.formatter.XAxisValueFormatter;
 import com.github.mikephil.charting.formatter.YAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
@@ -102,10 +103,10 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
                     LineDataSet set = new LineDataSet(xvalues, "values");
                     dataSets.add(set);
                     LineData ldata = new LineData(xlabels, dataSets);
+                    ldata.setValueFormatter(new YAxisFormatter());
                     root.setData(ldata);
                     root.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-                    YAxis yaxis = root.getAxisLeft();
-                    yaxis.setValueFormatter(new YAxisFormatter());
+
                     XAxis xaxis = root.getXAxis();
                     xaxis.setValueFormatter(new XAxisFromatter());
                     root.invalidate();
@@ -138,7 +139,7 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
             parseformat = new SimpleDateFormat("yyyy-MM-dd");
         }
     }
-    class YAxisFormatter implements YAxisValueFormatter{
+    class YAxisFormatter implements ValueFormatter{
         private DecimalFormat mformat;
 
         public YAxisFormatter() {
@@ -147,7 +148,7 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
         }
 
         @Override
-        public String getFormattedValue(float value, YAxis yAxis) {
+        public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
             return mformat.format(value);
         }
     }
