@@ -20,16 +20,21 @@ import com.facebook.react.uimanager.UIProp;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.github.mikephil.charting.charts.*;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.YAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.lang.Object;
 
@@ -88,9 +93,14 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
 
                     }
                     ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-                    dataSets.add(new LineDataSet(xvalues, "values"));
+                    LineDataSet set = new LineDataSet(xvalues, "values");
+                    set.setColors(ColorTemplate.MATERIAL_COLORS);
+                    dataSets.add(set);
                     LineData ldata = new LineData(xlabels, dataSets);
                     root.setData(ldata);
+                    root.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+                    YAxis yaxis = root.getAxisLeft();
+                    yaxis.setValueFormatter(new YAxisFormatter());
                     root.invalidate();
                 }
                 catch ( JSONException e){
@@ -98,5 +108,17 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
                 }
             }
 
+    }
+    class YAxisFormatter implements YAxisValueFormatter{
+        private DecimalFormat mformat;
+        public YAxisFormatter() {
+            mformat = new DecimalFormat("##0.#");
+
+        }
+
+        @Override
+        public String getFormattedValue(float value, YAxis yAxis) {
+            return mformat.format(value);
+        }
     }
 }
