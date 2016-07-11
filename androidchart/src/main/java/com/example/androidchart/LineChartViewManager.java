@@ -106,7 +106,7 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
                     ldata.setValueFormatter(new YAxisFormatter());
                     root.setData(ldata);
                     root.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-
+                    root.setDescription("");
                     XAxis xaxis = root.getXAxis();
                     xaxis.setValueFormatter(new XAxisFromatter());
                     root.invalidate();
