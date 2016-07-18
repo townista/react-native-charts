@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.text.format.DateFormat;
 import android.util.Log;
 
+import com.facebook.react.bridge.UiThreadUtil;
 import com.facebook.react.uimanager.LayoutShadowNode;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -76,47 +77,62 @@ public class LineChartViewManager extends SimpleViewManager<LineChart> {
     }
 
     @ReactProp(name = "data")
-    public void setLineData(LineChart root, String data) {
-            ArrayList<String> xlabels = new ArrayList<>();
-            ArrayList<Entry> xvalues = new ArrayList<>();
+    public void setLineData(final LineChart root, final String data) {
 
             Log.d("linechart",data);
 
             if (data != null) {
-                try {
-                    JSONArray dataArray = new JSONArray(data);
 
-                    Log.d("linechart",dataArray.toString());
+                    new Thread(new Runnable() {
+                        ArrayList<String> xlabels = new ArrayList<>();
+                        ArrayList<Entry> xvalues = new ArrayList<>();
+                        @Override
+                        public void run() {
+                            try {
+                                JSONArray dataArray = new JSONArray(data);
 
-                    for (int i = 0 ; i < dataArray.length() ; i++) {
-                        try {
-                            JSONObject dataArrayElem = (JSONObject) dataArray.get(i);
-                            xlabels.add(dataArrayElem.getString("date"));
-                            xvalues.add(new Entry(dataArrayElem.getInt("value"), i));
+                                Log.d("linechart", dataArray.toString());
+
+                                for (int i = 0; i < dataArray.length(); i++) {
+                                    try {
+                                        JSONObject dataArrayElem = (JSONObject) dataArray.get(i);
+                                        xlabels.add(dataArrayElem.getString("date"));
+                                        xvalues.add(new Entry(dataArrayElem.getInt("value"), i));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                                LineDataSet set = new LineDataSet(xvalues, "values");
+                                dataSets.add(set);
+                                final LineData ldata = new LineData(xlabels, dataSets);
+                                ldata.setValueFormatter(new YAxisFormatter());
+
+                                UiThreadUtil.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        root.setData(ldata);
+                                        root.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+                                        root.setDescription("");
+                                        XAxis xaxis = root.getXAxis();
+                                        xaxis.setValueFormatter(new XAxisFromatter());
+                                        root.invalidate();
+                                    }
+                                });
+                            }
+                            catch (JSONException e){
+                                e.printStackTrace();
+                            }
                         }
-                        catch (JSONException e) {
-                            e.printStackTrace();
-                        }
 
-                    }
-                    ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-                    LineDataSet set = new LineDataSet(xvalues, "values");
-                    dataSets.add(set);
-                    LineData ldata = new LineData(xlabels, dataSets);
-                    ldata.setValueFormatter(new YAxisFormatter());
-                    root.setData(ldata);
-                    root.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-                    root.setDescription("");
-                    XAxis xaxis = root.getXAxis();
-                    xaxis.setValueFormatter(new XAxisFromatter());
-                    root.invalidate();
+                    }).start();
+
+
                 }
-                catch ( JSONException e){
-                    e.printStackTrace();
-                }
+
             }
-
-    }
+    
     class XAxisFromatter implements XAxisValueFormatter{
         SimpleDateFormat format;
         SimpleDateFormat parseformat;
